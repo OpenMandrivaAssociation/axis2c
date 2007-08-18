@@ -1,10 +1,11 @@
 %define	major 0
-%define libname	%mklibname axis2c %{major}
+%define libname %mklibname axis2c %{major}
+%define develname %mklibname -d axis2c
 
 Summary:	Axis2/C is an effort to implement Axis2 architecture, in C
 Name:		axis2c
-Version:	0.91
-Release:	%mkrel 2
+Version:	1.0.0
+Release:	%mkrel 1
 Group:		System/Libraries
 License:	Apache License
 URL:		http://ws.apache.org/axis2/c/
@@ -12,11 +13,11 @@ Source0:	http://www.apache.org/dist/ws/axis2/c/0_91/axis2c-src-%{version}.tar.gz
 Source1:	http://www.apache.org/dist/ws/axis2/c/0_91/axis2c-src-%{version}.tar.gz.asc
 Source2:	A64_mod_axis2.conf
 Patch0:		axis2c-src-0.91-missing_headers.diff
-Patch1:		axis2c-src-0.91-prglibdir.diff
-Patch2:		axis2c-src-0.91-mdv_conf.diff
-Patch3:		axis2c-src-0.91-mod_axis2.diff
-Patch4:		axis2c-src-0.91-mod_addr.diff
-BuildRequires:	apache-devel >= 2.0.54
+Patch1:		axis2c-prglibdir.diff
+Patch2:		axis2c-correct_mod_names.diff
+Patch3:		axis2c-mdv_conf.diff
+Patch4:		axis2c-no_werror.diff
+BuildRequires:	apache-devel >= 2.2.0
 BuildRequires:	apr-devel
 BuildRequires:	openssl-devel
 BuildRequires:	libxml2-devel
@@ -35,30 +36,30 @@ Group:          System/Libraries
 Axis2/C is an effort to implement Axis2 architecture, in C. Axis2/C can be used
 to provide and consume Web Services.
 
-%package -n	%{libname}-devel
+%package -n	%{develname}
 Summary:	Static library and header files for the axis2 library
 Group:		Development/C
-Provides:	lib%{name}-devel = %{version}
+Provides:	%{libname}-devel = %{version}
+Obsoletes:	%{libname}-devel
 Provides:	%{name}-devel = %{version}
 Requires:	%{libname} = %{version}-%{release}
 
-%description -n	%{libname}-devel
+%description -n	%{develname}
 Axis2/C is an effort to implement Axis2 architecture, in C. Axis2/C can be used
 to provide and consume Web Services.
 
 This package contains the static libevent library and its header files
 needed to compile applications such as stegdetect, etc.
 
-
 %package -n	apache-mod_axis2
 Summary:	Apache module that filter ActiveX on a proxy
 Group:		System/Servers
 Requires(pre): rpm-helper
 Requires(postun): rpm-helper
-Requires(pre):	apache-conf >= 2.0.54
-Requires(pre):	apache >= 2.0.54
-Requires:	apache-conf >= 2.0.54
-Requires:	apache >= 2.0.54
+Requires(pre):	apache-conf >= 2.2.0
+Requires(pre):	apache >= 2.2.0
+Requires:	apache-conf >= 2.2.0
+Requires:	apache >= 2.2.0
 Requires:	%{libname} = %{version}-%{release}
 
 %description -n	apache-mod_axis2
@@ -67,14 +68,30 @@ to provide and consume Web Services.
 
 This package contains the Axis2/C apache module.
 
+%package	docs
+Summary:	Documentation for Axis2/C.
+Group:		System/Servers
+
+%description	docs
+Axis2/C is an effort to implement Axis2 architecture, in C. Axis2/C can be used
+to provide and consume Web Services.
+
+This package contains the documentation for Axis2/C.
+
 %prep
 
 %setup -q -n axis2c-src-%{version}
+
+#for i in `find -type f -name "Makefile.am"`; do
+#    perl -pi -e "s|^prglibdir=\\\$\(prefix\)/modules/|prglibdir=\\\$\(libdir\)/axis2c/modules/|g" $i
+#    perl -pi -e "s|^prglibdir=\\\$\(prefix\)/services/|prglibdir=\\\$\(libdir\)/axis2c/services/|g" $i
+#done
+
 %patch0 -p1
 %patch1 -p1
-%patch2 -p0
+%patch2 -p1
 %patch3 -p0
-%patch4 -p0
+%patch4 -p1
 
 cp %{SOURCE2} A64_mod_axis2.conf
 
@@ -130,8 +147,16 @@ rm -f %{buildroot}%{_libdir}/apache-extramodules/*.la
 
 install -m0644 A64_mod_axis2.conf %{buildroot}%{_sysconfdir}/httpd/modules.d/A64_mod_axis2.conf
 
+# fix docs
+cp axiom/ChangeLog ChangeLog.axiom
+cp axiom/NEWS NEWS.axiom
+cp axiom/README README.axiom
+cp guththila/README README.guththila
+
+
 # cleanup
 rm -rf %{buildroot}%{_prefix}/logs
+rm -rf %{buildroot}%{_prefix}/docs
 rm -f %{buildroot}%{_prefix}/AUTHORS
 rm -f %{buildroot}%{_prefix}/COPYING
 rm -f %{buildroot}%{_prefix}/CREDITS
@@ -139,6 +164,13 @@ rm -f %{buildroot}%{_prefix}/INSTALL
 rm -f %{buildroot}%{_prefix}/LICENSE
 rm -f %{buildroot}%{_prefix}/NEWS
 rm -f %{buildroot}%{_prefix}/README
+rm -f %{buildroot}%{_prefix}/config.guess
+rm -f %{buildroot}%{_prefix}/config.sub
+rm -f %{buildroot}%{_prefix}/depcomp
+rm -f %{buildroot}%{_prefix}/install-sh
+rm -f %{buildroot}%{_prefix}/ltmain.sh
+rm -f %{buildroot}%{_prefix}/missing
+rm -f %{buildroot}%{_prefix}/NOTICE
 
 %post -n %{libname} -p /sbin/ldconfig
 
@@ -161,36 +193,45 @@ fi
 
 %files -n %{libname}
 %defattr(-,root,root)
-%doc COPYING CREDITS LICENSE
+%doc COPYING CREDITS LICENSE *.axiom *.guththila
 %dir %{_sysconfdir}/%{name}
 %attr(0644,root,root) %config(noreplace) %{_sysconfdir}/%{name}/axis2.xml
 %attr(0644,root,root) %config(noreplace) %{_sysconfdir}/%{name}/axiscpp.conf
 %dir %{_libdir}/%{name}/modules
 %dir %{_libdir}/%{name}/modules/addressing
+%dir %{_libdir}/%{name}/modules/logging
 %{_libdir}/%{name}/modules/addressing/module.xml
 %{_libdir}/%{name}/modules/addressing/*.so
+%{_libdir}/%{name}/modules/logging/*.so
+%{_libdir}/%{name}/modules/logging/module.xml
 %{_libdir}/*.so.*
 %attr(0755,root,root) %{_sbindir}/axis2_http_server
 %dir /var/log/%{name}
 
-%files -n %{libname}-devel
+%files -n %{develname}
 %defattr(-,root,root)
-%dir %{_includedir}/platforms
-%dir %{_includedir}/platforms/unix
-%dir %{_includedir}/platforms/windows
-%{_includedir}/platforms/*.h
-%{_includedir}/platforms/unix/*.h
-%{_includedir}/platforms/windows/*.h
-%{_includedir}/*.h
+%dir %{_includedir}/axis2-1.0
+%dir %{_includedir}/axis2-1.0/platforms
+%dir %{_includedir}/axis2-1.0/platforms/unix
+%dir %{_includedir}/axis2-1.0/platforms/windows
+%{_includedir}/axis2-1.0/platforms/*.h
+%{_includedir}/axis2-1.0/platforms/unix/*.h
+%{_includedir}/axis2-1.0/platforms/windows/*.h
+%{_includedir}/axis2-1.0/*.h
 %{_libdir}/%{name}/modules/addressing/*.a
 %{_libdir}/%{name}/modules/addressing/*.la
+%{_libdir}/%{name}/modules/logging/*.a
+%{_libdir}/%{name}/modules/logging/*.la
 %{_libdir}/*.so
 %{_libdir}/*.a
 %{_libdir}/*.la
+%{_libdir}/pkgconfig/axis2c.pc
 
 %files -n apache-mod_axis2
 %defattr(-,root,root)
 %attr(0644,root,root) %config(noreplace) %{_sysconfdir}/httpd/modules.d/A64_mod_axis2.conf
 %attr(0755,root,root) %{_libdir}/apache-extramodules/mod_axis2.so
 
-
+%files docs
+%defattr(-,root,root)
+%doc docs/*
