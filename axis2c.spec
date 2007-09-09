@@ -1,11 +1,11 @@
 %define	major 0
 %define libname %mklibname axis2c %{major}
-%define develname %mklibname -d axis2c
+%define develname %mklibname axis2c -d
 
 Summary:	Axis2/C is an effort to implement Axis2 architecture, in C
 Name:		axis2c
 Version:	1.0.0
-Release:	%mkrel 1
+Release:	%mkrel 2
 Group:		System/Libraries
 License:	Apache License
 URL:		http://ws.apache.org/axis2/c/
@@ -39,10 +39,10 @@ to provide and consume Web Services.
 %package -n	%{develname}
 Summary:	Static library and header files for the axis2 library
 Group:		Development/C
-Provides:	%{libname}-devel = %{version}
-Obsoletes:	%{libname}-devel
-Provides:	%{name}-devel = %{version}
 Requires:	%{libname} = %{version}-%{release}
+Provides:	%{name}-devel = %{version}-%{release}
+Provides:	lib%{name}-devel = %{version}-%{release}
+Obsoletes:	%{mklibname axis2c 0 -d}
 
 %description -n	%{develname}
 Axis2/C is an effort to implement Axis2 architecture, in C. Axis2/C can be used
