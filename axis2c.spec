@@ -69,7 +69,7 @@ to provide and consume Web Services.
 This package contains the Axis2/C apache module.
 
 %package	docs
-Summary:	Documentation for Axis2/C.
+Summary:	Documentation for Axis2/C
 Group:		System/Servers
 
 %description	docs
