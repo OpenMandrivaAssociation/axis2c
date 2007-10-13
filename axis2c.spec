@@ -4,19 +4,21 @@
 
 Summary:	Axis2/C is an effort to implement Axis2 architecture, in C
 Name:		axis2c
-Version:	1.0.0
-Release:	%mkrel 2
+Version:	1.1.0
+Release:	%mkrel 1
 Group:		System/Libraries
 License:	Apache License
 URL:		http://ws.apache.org/axis2/c/
 Source0:	http://www.apache.org/dist/ws/axis2/c/0_91/axis2c-src-%{version}.tar.gz
 Source1:	http://www.apache.org/dist/ws/axis2/c/0_91/axis2c-src-%{version}.tar.gz.asc
 Source2:	A64_mod_axis2.conf
+Source3:	autogen.sh
 Patch0:		axis2c-src-0.91-missing_headers.diff
 Patch1:		axis2c-prglibdir.diff
 Patch2:		axis2c-correct_mod_names.diff
 Patch3:		axis2c-mdv_conf.diff
 Patch4:		axis2c-no_werror.diff
+Patch5:		axis2c-prgbindir.diff
 BuildRequires:	apache-devel >= 2.2.0
 BuildRequires:	apr-devel
 BuildRequires:	openssl-devel
@@ -78,6 +80,17 @@ to provide and consume Web Services.
 
 This package contains the documentation for Axis2/C.
 
+%package	tools
+Summary:	Axis2/C tools
+Group:		System/Servers
+Requires:	%{libname} = %{version}-%{release}
+
+%description	tools
+Axis2/C is an effort to implement Axis2 architecture, in C. Axis2/C can be used
+to provide and consume Web Services.
+
+This package contains various tools for Axis2/C.
+
 %prep
 
 %setup -q -n axis2c-src-%{version}
@@ -92,6 +105,7 @@ This package contains the documentation for Axis2/C.
 %patch2 -p1
 %patch3 -p0
 %patch4 -p1
+%patch5 -p0
 
 cp %{SOURCE2} A64_mod_axis2.conf
 
@@ -100,6 +114,8 @@ find . -type f|xargs file|grep 'CRLF'|cut -d: -f1|xargs perl -p -i -e 's/\r//'
 find . -type f|xargs file|grep 'text'|cut -d: -f1|xargs perl -p -i -e 's/\r//'
 
 libtoolize --copy --force
+cp %{SOURCE3} ./autogen.sh
+chmod 755 ./autogen.sh
 sh ./autogen.sh
 
 chmod 644 COPYING CREDITS LICENSE
@@ -153,7 +169,6 @@ cp axiom/NEWS NEWS.axiom
 cp axiom/README README.axiom
 cp guththila/README README.guththila
 
-
 # cleanup
 rm -rf %{buildroot}%{_prefix}/logs
 rm -rf %{buildroot}%{_prefix}/docs
@@ -171,6 +186,12 @@ rm -f %{buildroot}%{_prefix}/install-sh
 rm -f %{buildroot}%{_prefix}/ltmain.sh
 rm -f %{buildroot}%{_prefix}/missing
 rm -f %{buildroot}%{_prefix}/NOTICE
+rm -f %{buildroot}%{_datadir}/AUTHORS
+rm -f %{buildroot}%{_datadir}/COPYING
+rm -f %{buildroot}%{_datadir}/INSTALL
+rm -f %{buildroot}%{_datadir}/LICENSE
+rm -f %{buildroot}%{_datadir}/NEWS
+rm -f %{buildroot}%{_datadir}/README
 
 %post -n %{libname} -p /sbin/ldconfig
 
@@ -210,14 +231,14 @@ fi
 
 %files -n %{develname}
 %defattr(-,root,root)
-%dir %{_includedir}/axis2-1.0
-%dir %{_includedir}/axis2-1.0/platforms
-%dir %{_includedir}/axis2-1.0/platforms/unix
-%dir %{_includedir}/axis2-1.0/platforms/windows
-%{_includedir}/axis2-1.0/platforms/*.h
-%{_includedir}/axis2-1.0/platforms/unix/*.h
-%{_includedir}/axis2-1.0/platforms/windows/*.h
-%{_includedir}/axis2-1.0/*.h
+%dir %{_includedir}/axis2-1.1
+%dir %{_includedir}/axis2-1.1/platforms
+%dir %{_includedir}/axis2-1.1/platforms/unix
+%dir %{_includedir}/axis2-1.1/platforms/windows
+%{_includedir}/axis2-1.1/platforms/*.h
+%{_includedir}/axis2-1.1/platforms/unix/*.h
+%{_includedir}/axis2-1.1/platforms/windows/*.h
+%{_includedir}/axis2-1.1/*.h
 %{_libdir}/%{name}/modules/addressing/*.a
 %{_libdir}/%{name}/modules/addressing/*.la
 %{_libdir}/%{name}/modules/logging/*.a
@@ -231,6 +252,11 @@ fi
 %defattr(-,root,root)
 %attr(0644,root,root) %config(noreplace) %{_sysconfdir}/httpd/modules.d/A64_mod_axis2.conf
 %attr(0755,root,root) %{_libdir}/apache-extramodules/mod_axis2.so
+
+%files tools
+%defattr(-,root,root)
+%doc tools/tcpmon/README
+%attr(0755,root,root) %{_bindir}/tcpmon
 
 %files docs
 %defattr(-,root,root)
