@@ -24,6 +24,7 @@ BuildRequires:	apr-devel
 BuildRequires:	openssl-devel
 BuildRequires:	libxml2-devel
 BuildRequires:	file
+BuildRoot:	%{_tmppath}/%{name}-%{version}-root
 
 %description
 Axis2/C is an effort to implement Axis2 architecture, in C. Axis2/C can be used
