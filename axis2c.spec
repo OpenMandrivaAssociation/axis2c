@@ -2,7 +2,7 @@
 %define libname %mklibname axis2c %{major}
 %define develname %mklibname axis2c -d
 
-Summary:	Axis2/C is an effort to implement Axis2 architecture, in C
+Summary:	Effort to implement Axis2 architecture, in C
 Name:		axis2c
 Version:	1.1.0
 Release:	%mkrel 1
@@ -31,7 +31,7 @@ Axis2/C is an effort to implement Axis2 architecture, in C. Axis2/C can be used
 to provide and consume Web Services.
 
 %package -n	%{libname}
-Summary:	Axis2/C is an effort to implement Axis2 architecture, in C
+Summary:	Effort to implement Axis2 architecture, in C
 Group:          System/Libraries
 
 %description -n	%{libname}
