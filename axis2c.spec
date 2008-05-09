@@ -4,8 +4,8 @@
 
 Summary:	Effort to implement Axis2 architecture, in C
 Name:		axis2c
-Version:	1.1.0
-Release:	%mkrel 2
+Version:	1.4.0
+Release:	%mkrel 1
 Group:		System/Libraries
 License:	Apache License
 URL:		http://ws.apache.org/axis2/c/
@@ -24,7 +24,7 @@ BuildRequires:	apr-devel
 BuildRequires:	openssl-devel
 BuildRequires:	libxml2-devel
 BuildRequires:	file
-BuildRoot:	%{_tmppath}/%{name}-%{version}-root
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 Axis2/C is an effort to implement Axis2 architecture, in C. Axis2/C can be used
@@ -140,9 +140,12 @@ APR_INCLUDES="`$APR_CONFIG --includedir`"
 %make
 
 %install
-[ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
+rm -rf %{buildroot}
 
-%makeinstall_std
+mkdir -p installed_docs
+touch installed_docs/README
+
+%makeinstall_std docsdir=./installed_docs
 
 install -d %{buildroot}%{_sysconfdir}/%{name}
 install -d %{buildroot}/var/log/%{name}
@@ -192,6 +195,7 @@ rm -f %{buildroot}%{_datadir}/INSTALL
 rm -f %{buildroot}%{_datadir}/LICENSE
 rm -f %{buildroot}%{_datadir}/NEWS
 rm -f %{buildroot}%{_datadir}/README
+rm -rf %{buildroot}%{_bindir}/tools
 
 %post -n %{libname} -p /sbin/ldconfig
 
@@ -210,7 +214,7 @@ if [ "$1" = "0" ]; then
 fi
 
 %clean
-[ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
+rm -rf %{buildroot}
 
 %files -n %{libname}
 %defattr(-,root,root)
@@ -231,14 +235,14 @@ fi
 
 %files -n %{develname}
 %defattr(-,root,root)
-%dir %{_includedir}/axis2-1.1
-%dir %{_includedir}/axis2-1.1/platforms
-%dir %{_includedir}/axis2-1.1/platforms/unix
-%dir %{_includedir}/axis2-1.1/platforms/windows
-%{_includedir}/axis2-1.1/platforms/*.h
-%{_includedir}/axis2-1.1/platforms/unix/*.h
-%{_includedir}/axis2-1.1/platforms/windows/*.h
-%{_includedir}/axis2-1.1/*.h
+%dir %{_includedir}/axis2-%{version}
+%dir %{_includedir}/axis2-%{version}/platforms
+%dir %{_includedir}/axis2-%{version}/platforms/unix
+%dir %{_includedir}/axis2-%{version}/platforms/windows
+%{_includedir}/axis2-%{version}/platforms/*.h
+%{_includedir}/axis2-%{version}/platforms/unix/*.h
+%{_includedir}/axis2-%{version}/platforms/windows/*.h
+%{_includedir}/axis2-%{version}/*.h
 %{_libdir}/%{name}/modules/addressing/*.a
 %{_libdir}/%{name}/modules/addressing/*.la
 %{_libdir}/%{name}/modules/logging/*.a
