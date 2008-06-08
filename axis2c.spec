@@ -130,12 +130,21 @@ fi
 APACHE_INCLUDES="`%{_sbindir}/apxs -q INCLUDEDIR`"
 APR_INCLUDES="`$APR_CONFIG --includedir`"
 
+export CFLAGS="%{optflags} -D_GNU_SOURCE"
+
 %configure2_5x \
     --enable-libxml2 \
     --enable-multi-thread \
     --enable-openssl \
     --with-apache2=$APACHE_INCLUDES \
     --with-apr=$APR_INCLUDES
+
+# nuke -Wl,--no-undefined for some of the Makefiles
+perl -pi -e "s|\-Wl,--no-undefined||g" \
+    src/core/transport/http/sender/Makefile \
+    src/core/transport/http/receiver/Makefile \
+    src/core/transport/http/common/Makefile \
+    axiom/src/parser/libxml2/Makefile
 
 %make
 
