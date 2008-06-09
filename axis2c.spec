@@ -206,9 +206,13 @@ rm -f %{buildroot}%{_datadir}/NEWS
 rm -f %{buildroot}%{_datadir}/README
 rm -rf %{buildroot}%{_bindir}/tools
 
+%if %mdkversion < 200900
 %post -n %{libname} -p /sbin/ldconfig
+%endif
 
+%if %mdkversion < 200900
 %postun -n %{libname} -p /sbin/ldconfig
+%endif
 
 %post -n apache-mod_axis2
 if [ -f %{_var}/lock/subsys/httpd ]; then
