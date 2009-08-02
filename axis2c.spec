@@ -4,13 +4,13 @@
 
 Summary:	Effort to implement Axis2 architecture, in C
 Name:		axis2c
-Version:	1.5.0
+Version:	1.6.0
 Release:	%mkrel 1
 Group:		System/Libraries
 License:	Apache License
 URL:		http://ws.apache.org/axis2/c/
-Source0:	http://www.apache.org/dist/ws/axis2/c/0_91/axis2c-src-%{version}.tar.gz
-Source1:	http://www.apache.org/dist/ws/axis2/c/0_91/axis2c-src-%{version}.tar.gz.asc
+Source0:	http://www.apache.org/dist/ws/axis2/c/1_6_0/axis2c-src-%{version}.tar.gz
+Source1:	http://www.apache.org/dist/ws/axis2/c/1_6_0/axis2c-src-%{version}.tar.gz.asc
 Source2:	A64_mod_axis2.conf
 Source3:	autogen.sh
 Patch0:		axis2c-src-0.91-missing_headers.diff
