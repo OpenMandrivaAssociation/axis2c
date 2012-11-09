@@ -1,0 +1,48 @@
+diff -Naur axis2c-src-1.5.0/axiom/configure.ac axis2c-src-1.5.0.oden/axiom/configure.ac
+--- axis2c-src-1.5.0/axiom/configure.ac	2008-07-10 14:55:00.000000000 +0200
++++ axis2c-src-1.5.0.oden/axiom/configure.ac	2009-01-07 16:18:10.000000000 +0100
+@@ -49,7 +49,7 @@
+ #CFLAGS="$CFLAGS -ansi -Wall -D_LARGEFILE64_SOURCE -Wno-implicit-function-declaration"
+ CFLAGS="$CFLAGS -D_LARGEFILE64_SOURCE"
+ if test "$GCC" = "yes"; then
+-    CFLAGS="$CFLAGS -ansi -Werror -Wall -Wno-implicit-function-declaration "
++    CFLAGS="$CFLAGS -ansi -Wall -Wno-implicit-function-declaration "
+ fi
+ 
+ LDFLAGS="$LDFLAGS -lpthread"
+diff -Naur axis2c-src-1.5.0/configure.ac axis2c-src-1.5.0.oden/configure.ac
+--- axis2c-src-1.5.0/configure.ac	2008-07-10 14:55:40.000000000 +0200
++++ axis2c-src-1.5.0.oden/configure.ac	2009-01-07 16:18:54.000000000 +0100
+@@ -62,7 +62,7 @@
+ CFLAGS="$CFLAGS -D_LARGEFILE64_SOURCE"
+ CPPFLAGS="$CPPFLAGS -D_LARGEFILE64_SOURCE"
+ if test "$GCC" = "yes"; then
+-    CFLAGS="$CFLAGS -ansi -Wall -Werror -Wno-implicit-function-declaration -g -D_GNU_SOURCE"
++    CFLAGS="$CFLAGS -ansi -Wall -Wno-implicit-function-declaration -g -D_GNU_SOURCE"
+ #    CFLAGS="$CFLAGS -ansi -Wall -Wno-implicit-function-declaration"
+ fi
+ LDFLAGS="$LDFLAGS -lpthread"
+diff -Naur axis2c-src-1.5.0/neethi/configure.ac axis2c-src-1.5.0.oden/neethi/configure.ac
+--- axis2c-src-1.5.0/neethi/configure.ac	2008-07-10 14:53:05.000000000 +0200
++++ axis2c-src-1.5.0.oden/neethi/configure.ac	2009-01-07 16:18:10.000000000 +0100
+@@ -34,7 +34,7 @@
+ #CFLAGS="$CFLAGS -ansi -Wall -D_LARGEFILE64_SOURCE -Wno-implicit-function-declaration"
+ CFLAGS="$CFLAGS -D_LARGEFILE64_SOURCE"
+ if test "$GCC" = "yes"; then
+-    CFLAGS="$CFLAGS -ansi -Wall -Werror -Wno-implicit-function-declaration "
++    CFLAGS="$CFLAGS -ansi -Wall -Wno-implicit-function-declaration "
+ fi
+ 
+ LDFLAGS="$LDFLAGS -lpthread"
+diff -Naur axis2c-src-1.5.0/util/configure.ac axis2c-src-1.5.0.oden/util/configure.ac
+--- axis2c-src-1.5.0/util/configure.ac	2008-07-10 14:55:40.000000000 +0200
++++ axis2c-src-1.5.0.oden/util/configure.ac	2009-01-07 16:18:37.000000000 +0100
+@@ -49,7 +49,7 @@
+ #CFLAGS="$CFLAGS -ansi -Wall -D_LARGEFILE64_SOURCE -Wno-implicit-function-declaration"
+ CFLAGS="$CFLAGS -D_LARGEFILE64_SOURCE"
+ if test "$GCC" = "yes"; then
+-    CFLAGS="$CFLAGS -ansi -Wall -Werror -Wno-implicit-function-declaration -D_GNU_SOURCE"
++    CFLAGS="$CFLAGS -ansi -Wall -Wno-implicit-function-declaration -D_GNU_SOURCE"
+ fi
+ LDFLAGS="$LDFLAGS -lpthread"
+ 

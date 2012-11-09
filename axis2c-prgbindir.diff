@@ -1,0 +1,8 @@
+--- tools/tcpmon/src/Makefile.am	2009-08-02 13:21:00.000000000 +0200
++++ tools/tcpmon/src/Makefile.am.oden	2009-08-02 13:21:45.000000000 +0200
+@@ -1,4 +1,4 @@
+-prgbindir=$(prefix)/bin/tools/tcpmon
++prgbindir=$(bindir)/
+ 
+ prgbin_PROGRAMS = tcpmon
+ 

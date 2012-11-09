@@ -1,0 +1,108 @@
+diff -Naur axis2c-src-1.4.0/samples/codegen/server/calculator/Makefile.am axis2c-src-1.4.0.oden/samples/codegen/server/calculator/Makefile.am
+--- axis2c-src-1.4.0/samples/codegen/server/calculator/Makefile.am	2007-11-23 07:47:30.000000000 +0100
++++ axis2c-src-1.4.0.oden/samples/codegen/server/calculator/Makefile.am	2009-01-07 16:09:44.000000000 +0100
+@@ -1,4 +1,4 @@
+-prglibdir=$(prefix)/services/Calculator
++prglibdir=$(libdir)/axis2c/services/Calculator
+ samplesdir=$(prefix)/samples/server/Calculator
+ prglib_LTLIBRARIES = libCalculator.la
+ prglib_DATA= services.xml
+diff -Naur axis2c-src-1.4.0/samples/codegen/server/calc_xml_inout/Makefile.am axis2c-src-1.4.0.oden/samples/codegen/server/calc_xml_inout/Makefile.am
+--- axis2c-src-1.4.0/samples/codegen/server/calc_xml_inout/Makefile.am	2007-11-23 07:47:29.000000000 +0100
++++ axis2c-src-1.4.0.oden/samples/codegen/server/calc_xml_inout/Makefile.am	2009-01-07 16:09:44.000000000 +0100
+@@ -1,4 +1,4 @@
+-prglibdir=$(prefix)/services/Calculator
++prglibdir=$(libdir)/axis2c/services/Calculator
+ samplesdir=$(prefix)/samples/server/Calculator
+ prglib_LTLIBRARIES = libCalculator.la
+ prglib_DATA= services.xml
+diff -Naur axis2c-src-1.4.0/samples/codegen/server/interop_doc1/Makefile.am axis2c-src-1.4.0.oden/samples/codegen/server/interop_doc1/Makefile.am
+--- axis2c-src-1.4.0/samples/codegen/server/interop_doc1/Makefile.am	2007-11-23 07:47:30.000000000 +0100
++++ axis2c-src-1.4.0.oden/samples/codegen/server/interop_doc1/Makefile.am	2009-01-07 16:09:44.000000000 +0100
+@@ -1,4 +1,4 @@
+-prglibdir=$(prefix)/services/interop_doc1
++prglibdir=$(libdir)/axis2c/services/interop_doc1
+ samplesdir=$(prefix)/samples/server/interop_doc1
+ prglib_LTLIBRARIES = libInteropTestPortTypeDocService.la
+ prglib_DATA= services.xml
+diff -Naur axis2c-src-1.4.0/samples/codegen/server/interop_doc2/Makefile.am axis2c-src-1.4.0.oden/samples/codegen/server/interop_doc2/Makefile.am
+--- axis2c-src-1.4.0/samples/codegen/server/interop_doc2/Makefile.am	2007-11-23 07:47:30.000000000 +0100
++++ axis2c-src-1.4.0.oden/samples/codegen/server/interop_doc2/Makefile.am	2009-01-07 16:09:44.000000000 +0100
+@@ -1,4 +1,4 @@
+-prglibdir=$(prefix)/services/interop_doc2
++prglibdir=$(libdir)/axis2c/services/interop_doc2
+ samplesdir=$(prefix)/samples/server/interop_doc2
+ prglib_LTLIBRARIES = libWSDLInteropTestDocLitService.la
+ prglib_DATA= services.xml
+diff -Naur axis2c-src-1.4.0/samples/server/Calculator/Makefile.am axis2c-src-1.4.0.oden/samples/server/Calculator/Makefile.am
+--- axis2c-src-1.4.0/samples/server/Calculator/Makefile.am	2008-03-10 06:29:36.000000000 +0100
++++ axis2c-src-1.4.0.oden/samples/server/Calculator/Makefile.am	2009-01-07 16:09:44.000000000 +0100
+@@ -1,4 +1,4 @@
+-prglibdir=$(prefix)/services/Calculator
++prglibdir=$(libdir)/axis2c/services/Calculator
+ prglib_LTLIBRARIES = libCalculator.la
+ prglib_DATA=services.xml Calculator.wsdl
+ EXTRA_DIST = services.xml Calculator.wsdl Calculator.mk calc.h
+diff -Naur axis2c-src-1.4.0/samples/server/echo/Makefile.am axis2c-src-1.4.0.oden/samples/server/echo/Makefile.am
+--- axis2c-src-1.4.0/samples/server/echo/Makefile.am	2008-01-21 07:17:50.000000000 +0100
++++ axis2c-src-1.4.0.oden/samples/server/echo/Makefile.am	2009-01-07 16:09:44.000000000 +0100
+@@ -1,4 +1,4 @@
+-prglibdir=$(prefix)/services/echo
++prglibdir=$(libdir)/axis2c/services/echo
+ prglib_LTLIBRARIES = libecho.la
+ prglib_DATA= services.xml
+ EXTRA_DIST = services.xml echo.mk echo.h
+diff -Naur axis2c-src-1.4.0/samples/server/math/Makefile.am axis2c-src-1.4.0.oden/samples/server/math/Makefile.am
+--- axis2c-src-1.4.0/samples/server/math/Makefile.am	2007-11-23 07:47:32.000000000 +0100
++++ axis2c-src-1.4.0.oden/samples/server/math/Makefile.am	2009-01-07 16:09:44.000000000 +0100
+@@ -1,4 +1,4 @@
+-prglibdir=$(prefix)/services/math
++prglibdir=$(libdir)/axis2c/services/math
+ prglib_LTLIBRARIES = libmath.la
+ prglib_DATA=services.xml 
+ EXTRA_DIST = services.xml math.mk math.h
+diff -Naur axis2c-src-1.4.0/samples/server/mtom/Makefile.am axis2c-src-1.4.0.oden/samples/server/mtom/Makefile.am
+--- axis2c-src-1.4.0/samples/server/mtom/Makefile.am	2007-11-23 07:47:32.000000000 +0100
++++ axis2c-src-1.4.0.oden/samples/server/mtom/Makefile.am	2009-01-07 16:09:44.000000000 +0100
+@@ -1,4 +1,4 @@
+-prglibdir=$(prefix)/services/mtom
++prglibdir=$(libdir)/axis2c/services/mtom
+ prglib_LTLIBRARIES = libmtom.la
+ prglib_DATA= services.xml
+ EXTRA_DIST = services.xml mtom.mk mtom.h
+diff -Naur axis2c-src-1.4.0/samples/server/notify/Makefile.am axis2c-src-1.4.0.oden/samples/server/notify/Makefile.am
+--- axis2c-src-1.4.0/samples/server/notify/Makefile.am	2007-11-23 07:47:31.000000000 +0100
++++ axis2c-src-1.4.0.oden/samples/server/notify/Makefile.am	2009-01-07 16:09:44.000000000 +0100
+@@ -1,4 +1,4 @@
+-prglibdir=$(prefix)/services/notify
++prglibdir=$(libdir)/axis2c/services/notify
+ prglib_LTLIBRARIES = libnotify.la
+ prglib_DATA= services.xml
+ EXTRA_DIST = services.xml notify.mk notify.h
+diff -Naur axis2c-src-1.4.0/samples/server/sg_math/Makefile.am axis2c-src-1.4.0.oden/samples/server/sg_math/Makefile.am
+--- axis2c-src-1.4.0/samples/server/sg_math/Makefile.am	2007-11-23 07:47:31.000000000 +0100
++++ axis2c-src-1.4.0.oden/samples/server/sg_math/Makefile.am	2009-01-07 16:09:44.000000000 +0100
+@@ -1,4 +1,4 @@
+-prglibdir=$(prefix)/services/sg_math
++prglibdir=$(libdir)/axis2c/services/sg_math
+ prglib_LTLIBRARIES = libadd.la libsub.la libmul.la libdiv.la
+ prglib_DATA=services.xml
+ EXTRA_DIST = services.xml sg_math.mk add.h div.h mul.h sub.h
+diff -Naur axis2c-src-1.4.0/src/modules/mod_addr/Makefile.am axis2c-src-1.4.0.oden/src/modules/mod_addr/Makefile.am
+--- axis2c-src-1.4.0/src/modules/mod_addr/Makefile.am	2008-04-30 21:05:33.000000000 +0200
++++ axis2c-src-1.4.0.oden/src/modules/mod_addr/Makefile.am	2009-01-07 16:09:44.000000000 +0100
+@@ -1,4 +1,4 @@
+-prglibdir=$(prefix)/modules/addressing
++prglibdir=$(libdir)/axis2c/modules/addressing
+ prglib_LTLIBRARIES = libaxis2_mod_addr.la
+ prglib_DATA= module.xml
+ EXTRA_DIST = module.xml
+diff -Naur axis2c-src-1.4.0/src/modules/mod_log/Makefile.am axis2c-src-1.4.0.oden/src/modules/mod_log/Makefile.am
+--- axis2c-src-1.4.0/src/modules/mod_log/Makefile.am	2008-04-30 21:05:46.000000000 +0200
++++ axis2c-src-1.4.0.oden/src/modules/mod_log/Makefile.am	2009-01-07 16:09:44.000000000 +0100
+@@ -1,4 +1,4 @@
+-prglibdir=$(prefix)/modules/logging
++prglibdir=$(libdir)/axis2c/modules/logging
+ prglib_LTLIBRARIES = libaxis2_mod_log.la
+ prglib_DATA= module.xml
+ EXTRA_DIST = module.xml mod_log.h
