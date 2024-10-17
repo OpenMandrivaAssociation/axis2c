@@ -10,7 +10,7 @@ Version:	1.6.0
 Release:	%mkrel 4
 Group:		System/Libraries
 License:	Apache License
-URL:		http://ws.apache.org/axis2/c/
+URL:		https://ws.apache.org/axis2/c/
 Source0:	http://www.apache.org/dist/ws/axis2/c/1_6_0/axis2c-src-%{version}.tar.gz
 Source1:	http://www.apache.org/dist/ws/axis2/c/1_6_0/axis2c-src-%{version}.tar.gz.asc
 Source2:	A64_mod_axis2.conf
