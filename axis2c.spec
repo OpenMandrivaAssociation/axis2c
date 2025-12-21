@@ -21,6 +21,11 @@ Patch2:		axis2c-correct_mod_names.diff
 Patch3:		axis2c-mdv_conf.diff
 Patch4:		axis2c-no_werror.diff
 Patch5:		axis2c-prgbindir.diff
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	apache-devel >= 2.2.0
 BuildRequires:	apr-devel
 BuildRequires:	openssl-devel
