@@ -7,7 +7,7 @@
 Summary:	Effort to implement Axis2 architecture, in C
 Name:		axis2c
 Version:	1.6.0
-Release:	%mkrel 4
+Release:	5
 Group:		System/Libraries
 License:	Apache License
 URL:		https://ws.apache.org/axis2/c/
